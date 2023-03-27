@@ -50,7 +50,7 @@ export default function TodoTodo() {
       </Head>
       <Link href="/">ホーム</Link>
       <h1>
-        ToDo作成（step1）
+        ToDo（step1）
       </h1>
       <form onSubmit={e => handleSubmit(e)}>
         <input type={"text"} ref={valueRef} />

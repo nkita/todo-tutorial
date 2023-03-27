@@ -13,7 +13,7 @@ export default function Home() {
       <h1>ページ一覧</h1>
       <ul>
         <li>
-          <Link href="/todo">ToDo作成（step1）</Link>
+          <Link href="/todo">ToDo（step1）</Link>
         </li>
       </ul>
     </>
