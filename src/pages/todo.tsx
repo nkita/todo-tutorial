@@ -1,5 +1,6 @@
 import { useState, useRef, FormEvent } from 'react';
 import Head from 'next/head'
+import Link from 'next/link'
 import styles from '@/styles/todo.module.css'
 interface taskProp {
   id: number,
@@ -47,7 +48,10 @@ export default function TodoTodo() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      ここでは新規Todoを作ることができます。
+      <Link href="/">ホーム</Link>
+      <h1>
+        ToDo作成（step1）
+      </h1>
       <form onSubmit={e => handleSubmit(e)}>
         <input type={"text"} ref={valueRef} />
         <input type={"submit"} value={"追加"} />
