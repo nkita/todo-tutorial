@@ -1,0 +1,20 @@
+.task_area li,
+.completed_task_area li {
+    list-style: none;
+}
+
+.task_area li:hover,
+.completed_task_area li:hover {
+    background-color: #EEF1FF;
+}
+
+.completed_task_area li {
+    text-decoration: line-through;
+}
+
+.task_area label:hover,
+.task_area input[type="checkbox"]:hover,
+.completed_task_area label:hover,
+.completed_task_area input[type="checkbox"]:hover {
+    cursor: pointer;
+}

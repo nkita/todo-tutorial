@@ -1,6 +1,6 @@
-import { useState, useRef, useEffect, FormEvent } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import Head from 'next/head'
-
+import styles from '@/styles/todo.module.css'
 interface taskProp {
   id: number,
   value: string,
@@ -52,11 +52,11 @@ export default function TodoTodo() {
         <input type={"text"} ref={valueRef} />
         <input type={"submit"} value={"追加"} />
       </form>
-      <div className={"task_area"}>
+      <div className={styles.task_area}>
         <label>未完了</label>
         <Task tasks={tasks} handleTaskClick={handleChange} isCompleted={false} />
       </div>
-      <div className={"completed_task_area"}>
+      <div className={styles.completed_task_area}>
         <label>完了済み</label>
         <Task tasks={tasks} handleTaskClick={handleChange} isCompleted={true} />
       </div>
