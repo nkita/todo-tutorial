@@ -8,7 +8,7 @@ interface taskProp {
   isCompleted: boolean,
 }
 
-export default function TodoTodo() {
+export default function Todo() {
   const valueRef = useRef<HTMLInputElement>(null);
   const [tasks, setTasks] = useState<taskProp[]>([]);
   const [id, setId] = useState(0);
