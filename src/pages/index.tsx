@@ -12,9 +12,8 @@ export default function Home() {
       </Head>
       <h1>ページ一覧</h1>
       <ul>
-        <li>
-          <Link href="/todo">ToDo（step1）</Link>
-        </li>
+        <li><Link href="/todo">ToDo（step1）</Link></li>
+        <li><Link href="/todo2">ToDo（step2）</Link></li>
       </ul>
     </>
   )

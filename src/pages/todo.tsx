@@ -58,11 +58,15 @@ export default function Todo() {
       </form>
       <div className={styles.task_area}>
         <label>未完了</label>
-        <Task tasks={tasks} handleTaskClick={handleChange} isCompleted={false} />
+        <ul>
+          <Task tasks={tasks} handleTaskClick={handleChange} isCompleted={false} />
+        </ul>
       </div>
       <div className={styles.completed_task_area}>
         <label>完了済み</label>
-        <Task tasks={tasks} handleTaskClick={handleChange} isCompleted={true} />
+        <ul>
+          <Task tasks={tasks} handleTaskClick={handleChange} isCompleted={true} />
+        </ul>
       </div>
     </>
   )
