@@ -1,0 +1,8 @@
+export { Add } from './Add'
+export { Completed } from './Completed'
+export { Detail } from './Detail'
+export { Header } from './Header'
+export { Main } from './Main'
+export { Search } from './Search'
+export { Side } from './Side'
+export { TaskList } from './TaskList'

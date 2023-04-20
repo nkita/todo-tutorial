@@ -14,6 +14,7 @@ export default function Home() {
       <ul>
         <li><Link href="/todo">ToDo（step1）</Link></li>
         <li><Link href="/todo2">ToDo（step2）</Link></li>
+        <li><Link href="/mock">ToDo（mock）</Link></li>
       </ul>
     </>
   )
