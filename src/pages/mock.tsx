@@ -48,7 +48,6 @@ export default function Mock(props: any) {
           />
           <Flex flexDirection={"row"}>
             <Side
-              bg={'gray.200'}
               display={["none", "none", "flex"]}
               width={"10vw"}
               minW={200}
@@ -56,7 +55,6 @@ export default function Mock(props: any) {
               pt={"50px"}
               tags={tags} />
             <Main
-              bg={'gray.200'}
               minW={200}
               w={["100vw", "100vw", "70vw"]}
               h={"95vh"}
@@ -67,7 +65,6 @@ export default function Mock(props: any) {
               tasks={tasks}
             />
             <Detail
-              bg={'gray.200'}
               w={["0vw", "0vw", "30vw"]}
               h={"100vh"}
               pt={20}
