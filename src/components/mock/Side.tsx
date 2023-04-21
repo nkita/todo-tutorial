@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import { SideButton } from '../common'
 import { AttachmentIcon } from '@chakra-ui/icons'
-import type { tag } from '../../mock'
+import type { tag } from '../../pages/mock'
 
 export function Side(props: any) {
     const { tags, ...restProps } = props

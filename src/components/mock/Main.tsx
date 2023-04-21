@@ -14,7 +14,7 @@ import {
 import {
     Search,
     TaskList
-} from '../mock'
+} from '.'
 import Link from "next/link"
 export function Main(props: any) {
     const { tags, tasks, ...restProps } = props;

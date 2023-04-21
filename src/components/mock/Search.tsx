@@ -1,6 +1,6 @@
 import { HStack, Wrap, WrapItem } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
-import type { tag } from '../../mock'
+import type { tag } from '../../pages/mock'
 
 export function Search(props: any) {
     const { tags, ...restProps } = props;

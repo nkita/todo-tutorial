@@ -1,6 +1,6 @@
 import { Box, VStack } from '@chakra-ui/react'
 import Task from './Task';
-import type { task } from '../../mock'
+import type { task } from '../../pages/mock'
 
 export function TaskList(props: any) {
     const { tasks, ...restProps } = props;

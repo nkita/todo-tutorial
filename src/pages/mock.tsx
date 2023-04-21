@@ -1,12 +1,12 @@
 import Head from 'next/head'
-import Chakra from './components/chakra'
+import Chakra from '../components/chakra'
 import {
   Detail,
   Header,
   Main,
   Side,
-} from './components/mock'
-import theme from './components/theme';
+} from '../components/mock'
+import theme from '../components/theme';
 import {
   Flex,
 } from '@chakra-ui/react'
