@@ -16,7 +16,6 @@ export function Detail(props: any) {
     return (
         <Box
             {...props}
-            pb={400}
         >
             <Box
                 bg={'white'}
@@ -24,7 +23,21 @@ export function Detail(props: any) {
                 boxShadow={'base'}
                 p={3}
                 fontSize={'0.96em'}
+                // Todo Detail Height
+                maxH={"98%"}
                 overflow={"scroll"}
+                overflowX={"hidden"}
+                sx={{
+                    '&::-webkit-scrollbar': {
+                        width:"5px",
+                        backgroundColor: 'white',
+                        borderRadius: '5'
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                        borderRadius: '5'
+                    },
+                }}
             >
 
                 <Box

@@ -1,22 +1,14 @@
 import Head from 'next/head'
 import Chakra from './components/chakra'
 import {
-  Add,
-  Completed,
   Detail,
   Header,
   Main,
-  Search,
   Side,
-  TaskList
 } from './components/mock'
 import theme from './components/theme';
 import {
-  Box,
-  HStack,
   Flex,
-  Center,
-  Text
 } from '@chakra-ui/react'
 
 export default function Mock(props: any) {
@@ -84,15 +76,24 @@ export default function Mock(props: any) {
               task={tasks[0]}
             />
           </Flex>
-
         </Flex>
-
-
       </Chakra>
     </>
   )
 }
-
+export type task = {
+  id: string,
+  detail: string,
+  label: string,
+  tags: string[],
+  limitDate: string,
+  createDate: string,
+  updateDate: string
+}
+export type tag = {
+  id: string,
+  name: string
+}
 const tags = [
   { id: "001", name: "プライベート" },
   { id: "002", name: "アイデア" },

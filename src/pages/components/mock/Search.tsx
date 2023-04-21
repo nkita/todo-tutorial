@@ -1,5 +1,7 @@
 import { HStack, Wrap, WrapItem } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
+import type { tag } from '../../mock'
+
 export function Search(props: any) {
     const { tags, ...restProps } = props;
     return (
@@ -8,7 +10,7 @@ export function Search(props: any) {
         >
             <Wrap>
                 {tags &&
-                    tags.map(t => {
+                    tags.map((t: tag) => {
                         return (
                             <WrapItem key={t.id}>
                                 <SearchTag tagName={t.name} />
@@ -17,7 +19,6 @@ export function Search(props: any) {
                     })
                 }
             </Wrap>
-
         </HStack >
     )
 }

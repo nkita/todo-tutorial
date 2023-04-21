@@ -1,5 +1,7 @@
 import { Box, VStack } from '@chakra-ui/react'
 import Task from './Task';
+import type { task } from '../../mock'
+
 export function TaskList(props: any) {
     const { tasks, ...restProps } = props;
     return (
@@ -7,12 +9,12 @@ export function TaskList(props: any) {
             {...restProps}
         >
             <VStack
-            spacing={2}
+                spacing={2}
             >
                 {tasks &&
-                    tasks.map(t => {
+                    tasks.map((t: task) => {
                         return (
-                            < Task key={tasks.id} task={t}/>
+                            < Task key={t.id} task={t} />
                         )
                     })
                 }

@@ -6,6 +6,7 @@ import {
 } from '@chakra-ui/react'
 import { SideButton } from '../common'
 import { AttachmentIcon } from '@chakra-ui/icons'
+import type { tag } from '../../mock'
 
 export function Side(props: any) {
     const { tags, ...restProps } = props
@@ -17,7 +18,20 @@ export function Side(props: any) {
             <VStack
                 h={"100vh"}
                 pb={20}
-                overflow={"scroll"}>
+                overflow={"scroll"}
+                overflowX={"hidden"}
+                sx={{
+                    '&::-webkit-scrollbar': {
+                        width: "5px",
+                        borderRadius: '5'
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                        borderRadius: '5'
+                    },
+                }}
+            >
+
                 <Box>
                     <Heading
                         size={"md"}
@@ -44,10 +58,12 @@ export function Side(props: any) {
                             <Text pl={6}>なし</Text>
                         }
                         {tags &&
-                            tags.map(t => {
+                            tags.map((t: tag) => {
                                 return (
-                                    <SideButton key={t.id}
-                                        leftIcon={<AttachmentIcon />} >
+                                    <SideButton
+                                        key={t.id}
+                                        leftIcon={<AttachmentIcon />}
+                                    >
                                         {t.name}
                                     </SideButton>
                                 )
