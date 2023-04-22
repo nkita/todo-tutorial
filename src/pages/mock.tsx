@@ -71,6 +71,7 @@ export default function Mock(props: any) {
               pl={[0, 3, 3]}
               pr={[0, 3, 3]}
               task={tasks[0]}
+              tags={tags}
             />
           </Flex>
         </Flex>

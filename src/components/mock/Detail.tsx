@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react'
-import { Box, Textarea } from '@chakra-ui/react'
-
+import { Box, Textarea, Wrap, WrapItem } from '@chakra-ui/react'
+import { SearchTag } from './SearchTag'
+import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
-    const { task } = props;
+    const { task, tags } = props
     const refTA = useRef<HTMLTextAreaElement>(null);
     const [rows, setRows] = useState(3);
 
@@ -29,7 +30,7 @@ export function Detail(props: any) {
                 overflowX={"hidden"}
                 sx={{
                     '&::-webkit-scrollbar': {
-                        width:"5px",
+                        width: "5px",
                         backgroundColor: 'white',
                         borderRadius: '5'
                     },
@@ -61,7 +62,23 @@ export function Detail(props: any) {
                 </Box>
                 <Box
                     p={6}>
-                    {task.tags[0]}
+                    <Wrap>
+                        {task.tags &&
+                            task.tags.map((tagid: string) => {
+                                return (
+                                    tags.map((t: tag) => {
+                                        if (t.id === tagid) {
+                                            return (
+                                                <WrapItem key={t.id}>
+                                                    <SearchTag tagName={t.name} />
+                                                </WrapItem>
+                                            )
+                                        }
+                                    })
+                                )
+                            })
+                        }
+                    </Wrap>
                 </Box>
             </Box>
         </Box >
