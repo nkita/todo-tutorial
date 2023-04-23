@@ -1,5 +1,12 @@
 import { useRef, useState } from 'react'
-import { Box, Textarea, Wrap, WrapItem } from '@chakra-ui/react'
+import {
+    Box,
+    Wrap,
+    WrapItem, Editable,
+    EditablePreview,
+    EditableTextarea,
+    EditableInput
+} from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
@@ -41,24 +48,36 @@ export function Detail(props: any) {
                 }}
             >
 
-                <Box
-                    p={6}>
-                    {task.label}
+                <Box>
+                    <Editable
+                        pl={6}
+                        h={'100%'}
+                        defaultValue={task.label}
+                        outline={"none"}>
+                        <EditablePreview />
+                        <EditableInput
+                            resize={"none"}
+                            value={task.detail}
+                        />
+                    </Editable>
                 </Box>
                 <Box
                     p={3}
                 >
-                    <Textarea
-                        resize={"none"}
+                    <Editable
                         pl={3}
                         h={'100%'}
                         defaultValue={task.detail}
-                        rows={rows}
-                        ref={refTA}
-                        onChange={onChangeTodoDetail}
-                        outline={"none"}
-                    />
-
+                        outline={"none"}>
+                        <EditablePreview />
+                        <EditableTextarea
+                            resize={"none"}
+                            value={task.detail}
+                            onChange={onChangeTodoDetail}
+                            rows={rows}
+                            ref={refTA}
+                        />
+                    </Editable>
                 </Box>
                 <Box
                     p={6}>
