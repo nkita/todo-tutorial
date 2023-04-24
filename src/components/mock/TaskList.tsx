@@ -14,7 +14,7 @@ export function TaskList(props: any) {
                 {tasks &&
                     tasks.map((t: task) => {
                         return (
-                            < Task key={t.id} task={t} />
+                            <Task key={t.id} task={t} />
                         )
                     })
                 }

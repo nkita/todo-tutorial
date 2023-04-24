@@ -2,11 +2,10 @@ import {
     Box,
     Checkbox,
     HStack,
-    Text,
-    Editable,
-    EditablePreview,
-    EditableInput
+    IconButton
 } from '@chakra-ui/react'
+import { EditIcon } from '@chakra-ui/icons'
+import { ExTextArea } from '../common';
 export default function TaskList(props: any) {
     const { task } = props;
     return (
@@ -19,13 +18,12 @@ export default function TaskList(props: any) {
         >
             <HStack>
                 <Checkbox />
-                <Editable
-                    defaultValue={task.label}
-                    w={'100%'}
-                    >
-                    <EditablePreview />
-                    <EditableInput />
-                </Editable>
+                <ExTextArea fontSize={"sm"} text={task.label} />
+                <IconButton
+                    aria-label='Edit'
+                    size={"sm"}
+                    variant={"unstyled"}
+                    icon={<EditIcon />} />
             </HStack>
         </Box>
     )

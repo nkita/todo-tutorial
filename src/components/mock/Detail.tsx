@@ -8,6 +8,7 @@ import {
     EditableInput
 } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
+import { ExTextArea } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
     const { task, tags } = props
@@ -29,7 +30,7 @@ export function Detail(props: any) {
                 bg={'white'}
                 borderRadius={5}
                 boxShadow={'base'}
-                p={3}
+                pr={3}
                 fontSize={'0.96em'}
                 // Todo Detail Height
                 maxH={"98%"}
@@ -49,38 +50,21 @@ export function Detail(props: any) {
             >
 
                 <Box>
-                    <Editable
-                        pl={6}
-                        h={'100%'}
-                        defaultValue={task.label}
-                        outline={"none"}>
-                        <EditablePreview />
-                        <EditableInput
-                            resize={"none"}
-                            value={task.detail}
-                        />
-                    </Editable>
+                    <ExTextArea
+                        p={5}
+                        fontSize={"sm"}
+                        fontWeight={"bold"}
+                        text={task.label}
+                    />
                 </Box>
-                <Box
-                    p={3}
-                >
-                    <Editable
-                        pl={3}
-                        h={'100%'}
-                        defaultValue={task.detail}
-                        outline={"none"}>
-                        <EditablePreview />
-                        <EditableTextarea
-                            resize={"none"}
-                            value={task.detail}
-                            onChange={onChangeTodoDetail}
-                            rows={rows}
-                            ref={refTA}
-                        />
-                    </Editable>
+                <Box>
+                    <ExTextArea
+                        p={5}
+                        fontSize={"sm"}
+                        text={task.detail}
+                    />
                 </Box>
-                <Box
-                    p={6}>
+                <Box p={5}>
                     <Wrap>
                         {task.tags &&
                             task.tags.map((tagid: string) => {

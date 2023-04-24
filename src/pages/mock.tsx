@@ -56,7 +56,7 @@ export default function Mock(props: any) {
               tags={tags} />
             <Main
               minW={200}
-              w={["100vw", "100vw", "70vw"]}
+              w={["100vw", "100vw", "65vw"]}
               h={"95vh"}
               pl={[15, 15, 210]}
               pr={[3, 3, 3]}
@@ -65,11 +65,11 @@ export default function Mock(props: any) {
               tasks={tasks}
             />
             <Detail
-              w={["0vw", "0vw", "30vw"]}
+              w={["0vw", "0vw", "35vw"]}
               h={"100vh"}
               pt={20}
               pl={[0, 3, 3]}
-              pr={[0, 3, 3]}
+              pr={[0, 6, 6]}
               task={tasks[0]}
               tags={tags}
             />
@@ -114,7 +114,7 @@ const tasks = [
   { id: "004", label: "個人開発の計画をたてる", tags: ["001", "002"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
   { id: "005", label: "りんご", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
   { id: "006", label: "洗剤", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
-  { id: "006", label: "洗剤", tags: [], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
+  { id: "007", label: "洗剤", tags: [], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
 ]
 
 const completedTasks = [
