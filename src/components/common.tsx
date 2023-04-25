@@ -45,6 +45,7 @@ export function ExTextArea(props: any) {
             defaultValue={text}
             outline={"none"}
             w={"100%"}
+            selectAllOnFocus={false}
         >
             <EditablePreview
                 whiteSpace={"break-spaces"}
@@ -57,11 +58,10 @@ export function ExTextArea(props: any) {
                 onChange={onChangeTodoDetail}
                 rows={rows}
                 ref={ref}
-                pl={1}
+                p={1}
                 _focus={{
-                    boxShadow: " 0 0 1px 1px #BEE3F8",
+                    boxShadow: " 0 0 0px 1px #BEE3F8",
                     outline: "0",
-                    padding: "1px",
                     width:"100%"
                 }}
             />
