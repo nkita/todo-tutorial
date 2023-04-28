@@ -3,7 +3,9 @@ import {
     Button,
     Editable,
     EditablePreview,
-    EditableTextarea
+    EditableTextarea,
+    Textarea,
+    Skeleton
 } from '@chakra-ui/react'
 
 export function SideButton(props: any) {
@@ -24,13 +26,15 @@ export function SideButton(props: any) {
 }
 
 export function ExTextArea(props: any) {
-    const { text } = props;
+    const { text, placeholder } = props;
     const ref = useRef<HTMLTextAreaElement>(null);
-    const [rows, setRows] = useState(0);
-
+    const [rows, setRows] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
+        console.log("log:")
         onChangeTodoDetail()
-    })
+        setIsLoading(true)
+    }, [])
     const onChangeTodoDetail = () => {
         if (ref.current) {
             const va = ref.current.value;
@@ -39,32 +43,38 @@ export function ExTextArea(props: any) {
     }
 
     return (
-        <Editable
-            {...props}
-            h={'100%'}
-            defaultValue={text}
-            outline={"none"}
-            w={"100%"}
-            selectAllOnFocus={false}
-        >
-            <EditablePreview
-                whiteSpace={"break-spaces"}
-                overflow-wrap={"break-word"}
-                pl={1}
-            />
-            <EditableTextarea
-                resize={"none"}
-                value={text}
-                onChange={onChangeTodoDetail}
-                rows={rows}
-                ref={ref}
-                p={1}
-                _focus={{
-                    boxShadow: " 0 0 0px 1px #BEE3F8",
-                    outline: "0",
-                    width:"100%"
-                }}
-            />
-        </Editable>
+        <>
+            <Skeleton
+                {...props}
+                w={"100%"}
+                size={10}
+                isLoaded={isLoading}
+            >
+                <Textarea
+                    {...props}
+                    w={"100%"}
+                    defaultValue={text}
+                    outline={"none"}
+                    borderColor={"white"}
+                    resize={"none"}
+                    onChange={onChangeTodoDetail}
+                    rows={rows}
+                    ref={ref}
+                    p={2}
+                    placeholder={placeholder}
+                    boxShadow={"none"}
+                    _hover={{
+                        p: "2",
+                        borderColor: "gray.200"
+                    }}
+                    _focus={{
+                        p: "2",
+                        bg: "gray.50",
+                        borderColor: "gray.200",
+                        boxShadow: "none",
+                    }}
+                />
+            </Skeleton>
+        </>
     )
 }

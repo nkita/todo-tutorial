@@ -3,6 +3,7 @@ import {
     Box,
     Wrap,
     WrapItem, Editable,
+    Textarea,
     EditablePreview,
     EditableTextarea,
     EditableInput
@@ -30,7 +31,6 @@ export function Detail(props: any) {
                 bg={'white'}
                 borderRadius={5}
                 boxShadow={'base'}
-                pr={3}
                 fontSize={'0.96em'}
                 // Todo Detail Height
                 maxH={"98%"}
@@ -49,22 +49,22 @@ export function Detail(props: any) {
                 }}
             >
 
-                <Box>
+                <Box p={3}>
                     <ExTextArea
-                        p={5}
                         fontSize={"sm"}
                         fontWeight={"bold"}
                         text={task.label}
+                        placeholder="タスクを追加"
                     />
                 </Box>
-                <Box>
+                <Box p={3}>
                     <ExTextArea
-                        p={5}
                         fontSize={"sm"}
                         text={task.detail}
+                        placeholder="詳細を追加"
                     />
                 </Box>
-                <Box p={5}>
+                <Box p={4}>
                     <Wrap>
                         {task.tags &&
                             task.tags.map((tagid: string) => {
