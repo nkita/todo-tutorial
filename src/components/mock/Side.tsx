@@ -3,9 +3,10 @@ import {
     Text,
     Heading,
     VStack,
+    IconButton,
 } from '@chakra-ui/react'
 import { SideButton } from '../common'
-import { AttachmentIcon } from '@chakra-ui/icons'
+import { AttachmentIcon, PlusSquareIcon } from '@chakra-ui/icons'
 import type { tag } from '../../pages/mock'
 
 export function Side(props: any) {
@@ -46,7 +47,7 @@ export function Side(props: any) {
                         重要
                     </SideButton>
                     <SideButton>
-                        今日期限
+                        ブックマーク
                     </SideButton>
                     <Heading
                         size={"md"}

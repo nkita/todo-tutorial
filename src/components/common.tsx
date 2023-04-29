@@ -4,24 +4,31 @@ import {
     Editable,
     EditablePreview,
     EditableTextarea,
+    FormControl,
     Textarea,
-    Skeleton
+    Skeleton,
+    Input,
+    IconButton
 } from '@chakra-ui/react'
 
 export function SideButton(props: any) {
     return (
-        <Button
-            ml={3}
-            colorScheme='teal'
-            variant='ghost'
-            justifyContent="flex-start"
-            w={170}
-            fontSize={".875em"}
-            _hover={{ bg: 'blue.100' }}
-            {...props}
-        >
-            {props.children}
-        </Button>
+        <>
+            <Button
+                ml={3}
+                colorScheme='teal'
+                variant='ghost'
+                justifyContent="flex-start"
+                w={170}
+                fontSize={".875em"}
+                _hover={{ bg: 'blue.200', color: "white" }}
+                {...props}
+            >
+                {props.children}
+            </Button>
+
+        </>
+
     )
 }
 
@@ -31,7 +38,6 @@ export function ExTextArea(props: any) {
     const [rows, setRows] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
-        console.log("log:")
         onChangeTodoDetail()
         setIsLoading(true)
     }, [])
@@ -74,6 +80,54 @@ export function ExTextArea(props: any) {
                         boxShadow: "none",
                     }}
                 />
+            </Skeleton>
+        </>
+    )
+}
+export function ExInput(props: any) {
+    const { text, placeholder } = props;
+    const ref = useRef<HTMLTextAreaElement>(null);
+    const [isLoading, setIsLoading] = useState(false);
+    useEffect(() => {
+        setIsLoading(true)
+    }, [])
+
+    return (
+        <>
+            <Skeleton
+                {...props}
+                w={"100%"}
+                size={10}
+                isLoaded={isLoading}
+            >
+                <FormControl>
+                    <Input
+                        onSubmit={e => {
+                            console.log("asdfasd")
+                            e.preventDefault();
+                        }}
+                        {...props}
+                        w={"100%"}
+                        defaultValue={text}
+                        outline={"none"}
+                        borderColor={"white"}
+                        resize={"none"}
+                        ref={ref}
+                        p={2}
+                        placeholder={placeholder}
+                        boxShadow={"none"}
+                        _hover={{
+                            p: "2",
+                            borderColor: "gray.200"
+                        }}
+                        _focus={{
+                            p: "2",
+                            bg: "gray.50",
+                            borderColor: "gray.200",
+                            boxShadow: "none",
+                        }}
+                    />
+                </FormControl>
             </Skeleton>
         </>
     )

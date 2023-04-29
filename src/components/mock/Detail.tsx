@@ -9,7 +9,7 @@ import {
     EditableInput
 } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
-import { ExTextArea } from '../common'
+import { ExTextArea,ExInput } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
     const { task, tags } = props
@@ -50,7 +50,7 @@ export function Detail(props: any) {
             >
 
                 <Box p={3}>
-                    <ExTextArea
+                    <ExInput
                         fontSize={"sm"}
                         fontWeight={"bold"}
                         text={task.label}
