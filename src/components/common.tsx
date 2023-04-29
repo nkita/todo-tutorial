@@ -71,12 +71,12 @@ export function ExTextArea(props: any) {
                     boxShadow={"none"}
                     _hover={{
                         p: "2",
-                        borderColor: "gray.200"
+                        borderColor: "gray.400"
                     }}
                     _focus={{
                         p: "2",
                         bg: "gray.50",
-                        borderColor: "gray.200",
+                        borderColor: "gray.400",
                         boxShadow: "none",
                     }}
                 />
@@ -118,12 +118,12 @@ export function ExInput(props: any) {
                         boxShadow={"none"}
                         _hover={{
                             p: "2",
-                            borderColor: "gray.200"
+                            borderColor: "gray.400"
                         }}
                         _focus={{
                             p: "2",
                             bg: "gray.50",
-                            borderColor: "gray.200",
+                            borderColor: "gray.400",
                             boxShadow: "none",
                         }}
                     />

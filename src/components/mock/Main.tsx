@@ -2,11 +2,9 @@ import {
     Box,
     InputGroup,
     Input,
-    Button,
     InputRightElement,
     Link as LinkC,
     IconButton,
-    Textarea
 } from "@chakra-ui/react"
 import {
     SmallAddIcon
@@ -15,7 +13,6 @@ import {
     Search,
     TaskList
 } from '.'
-import Link from "next/link"
 export function Main(props: any) {
     const { tags, tasks, ...restProps } = props;
     return (
@@ -23,15 +20,12 @@ export function Main(props: any) {
             {...restProps}
             h={"100vh"}
         >
-            <InputGroup
-                size='sm'>
+            <InputGroup>
                 <Input
                     pr='7rem'
-                    borderRadius={"full"}
+                    rounded={10}
                     bg={"gray.50"}
-                    borderRight={"0px"}
                     placeholder='Add task...'
-                    boxShadow={"md"}
                 />
                 <InputRightElement width='6rem'>
                     <LinkC width='4rem' fontSize={10}>

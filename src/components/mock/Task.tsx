@@ -5,8 +5,6 @@ import {
     IconButton,
     Text
 } from '@chakra-ui/react'
-import { EditIcon } from '@chakra-ui/icons'
-import { ExInput } from '../common';
 export default function TaskList(props: any) {
     const { task } = props;
     return (
@@ -15,24 +13,24 @@ export default function TaskList(props: any) {
             bg={'white'}
             rounded={5}
             p={2}
-            boxShadow={'base'}
+            borderColor="gray.200"
+            borderWidth="1px"
             _hover={{
-                bg: "blue.50",
-                cursor:"pointer"
+                borderColor:"gray.400",
+                cursor: "pointer"
             }}
-            transition={"ease 0.3s"}
+            transition={"ease 0.2s"}
         >
             <HStack>
                 <Checkbox />
                 <Text
+                    borderColor={"blue"}
                     w={"100%"}
                     p={1}
                     fontSize={"0.9em"}
                 >
                     {task.label}
                 </Text>
-                {/* <ExInput fontSize={"sm"} text={task.label} /> */}
-
             </HStack>
         </Box>
     )
