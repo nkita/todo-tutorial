@@ -41,13 +41,20 @@ export function ExTextArea(props: any) {
         onChangeTodoDetail()
         setIsLoading(true)
     }, [])
+    useEffect(() => {
+        console.log(text)
+        if (text === undefined) {
+            setRows(1)
+        } else {
+            onChangeTodoDetail()
+        }
+    }, [text])
     const onChangeTodoDetail = () => {
         if (ref.current) {
             const va = ref.current.value;
             setRows(va.split('\n').length)
         }
     }
-
     return (
         <>
             <Skeleton
@@ -59,7 +66,7 @@ export function ExTextArea(props: any) {
                 <Textarea
                     {...props}
                     w={"100%"}
-                    defaultValue={text}
+                    value={text}
                     outline={"none"}
                     borderColor={"white"}
                     resize={"none"}
@@ -92,6 +99,9 @@ export function ExInput(props: any) {
         setIsLoading(true)
     }, [])
 
+    const handleChange = () => {
+        console.log("handleChage")
+    }
     return (
         <>
             <Skeleton
@@ -108,7 +118,8 @@ export function ExInput(props: any) {
                         }}
                         {...props}
                         w={"100%"}
-                        defaultValue={text}
+                        onChange={handleChange}
+                        value={text}
                         outline={"none"}
                         borderColor={"white"}
                         resize={"none"}

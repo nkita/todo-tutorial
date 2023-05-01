@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
     Box,
     Wrap,
@@ -9,19 +9,10 @@ import {
     EditableInput
 } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
-import { ExTextArea,ExInput } from '../common'
+import { ExTextArea, ExInput } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
     const { task, tags } = props
-    const refTA = useRef<HTMLTextAreaElement>(null);
-    const [rows, setRows] = useState(3);
-
-    const onChangeTodoDetail = () => {
-        if (refTA.current) {
-            const va = refTA.current.value;
-            setRows(va.split('\n').length)
-        }
-    }
 
     return (
         <Box

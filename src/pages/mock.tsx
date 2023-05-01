@@ -10,10 +10,18 @@ import theme from '../components/theme';
 import {
   Flex,
 } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 
 export default function Mock(props: any) {
   const { cookies } = props;
   const t = "Mock | Todo App Tutorial";
+  const [currentTask, setCurrentTask] = useState<task | null>(null)
+  const [currentTaskId, setCurrentTaskId] = useState<string | null>(null)
+  const onClickTask = (id: string) => setCurrentTaskId(id)
+  useEffect(() => {
+    const t = tasks.filter(t => t.id === currentTaskId)[0];
+    if (t !== undefined) setCurrentTask(t)
+  }, [currentTaskId])
   return (
     <>
       <Chakra cookies={cookies} theme={theme}>
@@ -56,23 +64,29 @@ export default function Mock(props: any) {
               tags={tags} />
             <Main
               minW={200}
-              w={["100vw", "100vw", "65vw"]}
+              w={
+                currentTaskId ? ["100vw", "100vw", "65vw"] : "100vw"
+              }
               h={"95vh"}
               pl={[15, 15, 210]}
               pr={[3, 3, 3]}
               pt={20}
               tags={tags}
               tasks={tasks}
+              currentTaskId={currentTaskId}
+              handleTaskClick={onClickTask}
             />
-            <Detail
-              w={["0vw", "0vw", "35vw"]}
-              h={"100vh"}
-              pt={20}
-              pl={[0, 3, 3]}
-              pr={[0, 6, 6]}
-              task={tasks[0]}
-              tags={tags}
-            />
+            {currentTask &&
+              <Detail
+                w={["0vw", "0vw", "35vw"]}
+                h={"100vh"}
+                pt={20}
+                pl={[0, 3, 3]}
+                pr={[0, 6, 6]}
+                task={currentTask}
+                tags={tags}
+              />
+            }
           </Flex>
         </Flex>
       </Chakra>
@@ -97,24 +111,14 @@ const tags = [
   { id: "002", name: "アイデア" },
   { id: "003", name: "買い物" },
   { id: "004", name: "仕事" },
-  { id: "005", name: "仕事" },
-  { id: "006", name: "仕事" },
-  { id: "007", name: "仕事" },
-  { id: "008", name: "仕事" },
-  { id: "009", name: "仕事" },
-  { id: "010", name: "仕事" },
-  { id: "011", name: "仕事" },
-  { id: "012", name: "仕事" },
-  { id: "013", name: "仕事" },
-  { id: "014", name: "仕事" },
 ]
 
 const tasks = [
   { id: "003", detail: "まずはどこから？\n ここからスタート \n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数", label: "旅行の計画を建てる", tags: ["001"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
-  { id: "004", label: "個人開発の計画をたてる", tags: ["001", "002"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
-  { id: "005", label: "りんご\n　改行が複数\n　改行が複数\n　改行が複数", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
-  { id: "006", label: "洗剤", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
-  { id: "007", label: "洗剤", tags: [], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
+  { id: "004", detail: "", label: "個人開発の計画をたてる", tags: ["001", "002"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
+  { id: "005", detail: "", label: "りんご\n　改行が複数\n　改行が複数\n　改行が複数", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
+  { id: "006", detail: "", label: "洗剤", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
+  { id: "007", detail: "", label: "洗剤2", tags: ["004"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
 ]
 
 const completedTasks = [

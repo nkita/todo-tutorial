@@ -14,7 +14,7 @@ import {
     TaskList
 } from '.'
 export function Main(props: any) {
-    const { tags, tasks, ...restProps } = props;
+    const { tags, tasks, handleTaskClick, currentTaskId, ...restProps } = props;
     return (
         <Box
             {...restProps}
@@ -43,7 +43,11 @@ export function Main(props: any) {
                 tags={tags}
                 pt={5}
             />
-            <TaskList tasks={tasks} pt={5} />
+            <TaskList
+                tasks={tasks}
+                currentTaskId={currentTaskId}
+                handleTaskClick={handleTaskClick}
+                pt={5} />
         </Box >
     )
 }

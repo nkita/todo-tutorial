@@ -6,20 +6,22 @@ import {
     Text
 } from '@chakra-ui/react'
 export default function TaskList(props: any) {
-    const { task } = props;
+    const { task, handleTaskClick, currentTaskId } = props;
+
     return (
         <Box
             w={'100%'}
             bg={'white'}
             rounded={5}
             p={2}
-            borderColor="gray.200"
+            borderColor={currentTaskId === task.id ? "gray.400" : "gray.200"}
             borderWidth="1px"
             _hover={{
-                borderColor:"gray.400",
+                borderColor: "gray.400",
                 cursor: "pointer"
             }}
             transition={"ease 0.2s"}
+            onClick={e => handleTaskClick(task.id)}
         >
             <HStack>
                 <Checkbox />
@@ -32,7 +34,7 @@ export default function TaskList(props: any) {
                     {task.label}
                 </Text>
             </HStack>
-        </Box>
+        </Box >
     )
 
 }

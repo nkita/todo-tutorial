@@ -3,7 +3,7 @@ import Task from './Task';
 import type { task } from '../../pages/mock'
 
 export function TaskList(props: any) {
-    const { tasks, ...restProps } = props;
+    const { tasks, handleTaskClick, currentTaskId, ...restProps } = props;
     return (
         <Box
             {...restProps}
@@ -14,7 +14,11 @@ export function TaskList(props: any) {
                 {tasks &&
                     tasks.map((t: task) => {
                         return (
-                            <Task key={t.id} task={t} />
+                            <Task
+                                handleTaskClick={handleTaskClick}
+                                currentTaskId={currentTaskId}
+                                key={t.id}
+                                task={t} />
                         )
                     })
                 }
