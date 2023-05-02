@@ -44,14 +44,14 @@ export function Detail(props: any) {
                     <ExInput
                         fontSize={"sm"}
                         fontWeight={"bold"}
-                        text={task.label}
+                        task={task}
                         placeholder="タスクを追加"
                     />
                 </Box>
                 <Box p={3}>
                     <ExTextArea
                         fontSize={"sm"}
-                        text={task.detail}
+                        task={task}
                         placeholder="詳細を追加"
                     />
                 </Box>

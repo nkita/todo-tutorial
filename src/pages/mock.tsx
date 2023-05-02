@@ -15,13 +15,28 @@ import { useEffect, useState } from 'react'
 export default function Mock(props: any) {
   const { cookies } = props;
   const t = "Mock | Todo App Tutorial";
+  const [tasks, setTasks] = useState(TASKS)
+  const [tags, setTags] = useState(TAGS)
   const [currentTask, setCurrentTask] = useState<task | null>(null)
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null)
-  const onClickTask = (id: string) => setCurrentTaskId(id)
-  useEffect(() => {
-    const t = tasks.filter(t => t.id === currentTaskId)[0];
-    if (t !== undefined) setCurrentTask(t)
-  }, [currentTaskId])
+
+  const onClickTask = (id: string) => {
+    const t = tasks.filter(t => {
+      if (t.id === id) {
+        setCurrentTask(t)
+        setCurrentTaskId(id)
+      }
+    })
+
+  }
+
+  const handleChange = (task: task) => {
+    const _tasks = tasks.map(t => {
+      if (t.id === task.id) return task
+      return t
+    })
+    setTasks(_tasks)
+  }
   return (
     <>
       <Chakra cookies={cookies} theme={theme}>
@@ -65,7 +80,7 @@ export default function Mock(props: any) {
             <Main
               minW={200}
               w={
-                currentTaskId ? ["100vw", "100vw", "65vw"] : "100vw"
+                currentTask ? ["100vw", "100vw", "65vw"] : "100vw"
               }
               h={"95vh"}
               pl={[15, 15, 210]}
@@ -85,6 +100,7 @@ export default function Mock(props: any) {
                 pr={[0, 6, 6]}
                 task={currentTask}
                 tags={tags}
+                onChange={handleChange}
               />
             }
           </Flex>
@@ -106,14 +122,14 @@ export type tag = {
   id: string,
   name: string
 }
-const tags = [
+const TAGS = [
   { id: "001", name: "プライベート" },
   { id: "002", name: "アイデア" },
   { id: "003", name: "買い物" },
   { id: "004", name: "仕事" },
 ]
 
-const tasks = [
+const TASKS = [
   { id: "003", detail: "まずはどこから？\n ここからスタート \n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数", label: "旅行の計画を建てる", tags: ["001"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
   { id: "004", detail: "", label: "個人開発の計画をたてる", tags: ["001", "002"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
   { id: "005", detail: "", label: "りんご\n　改行が複数\n　改行が複数\n　改行が複数", tags: ["003"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },

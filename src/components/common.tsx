@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import {
     Button,
-    Editable,
-    EditablePreview,
-    EditableTextarea,
     FormControl,
     Textarea,
     Skeleton,
@@ -33,26 +30,23 @@ export function SideButton(props: any) {
 }
 
 export function ExTextArea(props: any) {
-    const { text, placeholder } = props;
+    const { task, placeholder } = props;
     const ref = useRef<HTMLTextAreaElement>(null);
     const [rows, setRows] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
+    const [val, setVal] = useState(task.detail);
+    
     useEffect(() => {
-        onChangeTodoDetail()
+        setRows(task.detail.split('\n').length)
+        setVal(task.detail)
         setIsLoading(true)
-    }, [])
-    useEffect(() => {
-        console.log(text)
-        if (text === undefined) {
-            setRows(1)
-        } else {
-            onChangeTodoDetail()
-        }
-    }, [text])
-    const onChangeTodoDetail = () => {
+    }, [task])
+
+    const handleChange = () => {
         if (ref.current) {
             const va = ref.current.value;
             setRows(va.split('\n').length)
+            setVal(va)
         }
     }
     return (
@@ -66,11 +60,11 @@ export function ExTextArea(props: any) {
                 <Textarea
                     {...props}
                     w={"100%"}
-                    value={text}
+                    value={val}
                     outline={"none"}
                     borderColor={"white"}
                     resize={"none"}
-                    onChange={onChangeTodoDetail}
+                    onChange={handleChange}
                     rows={rows}
                     ref={ref}
                     p={2}
@@ -92,15 +86,20 @@ export function ExTextArea(props: any) {
     )
 }
 export function ExInput(props: any) {
-    const { text, placeholder } = props;
+    const { task, placeholder } = props;
     const ref = useRef<HTMLTextAreaElement>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [val, setVal] = useState(task.label);
+
     useEffect(() => {
         setIsLoading(true)
     }, [])
 
     const handleChange = () => {
-        console.log("handleChage")
+        if (ref.current) {
+            const va = ref.current.value;
+            setVal(va)
+        }
     }
     return (
         <>
@@ -119,7 +118,7 @@ export function ExInput(props: any) {
                         {...props}
                         w={"100%"}
                         onChange={handleChange}
-                        value={text}
+                        value={val}
                         outline={"none"}
                         borderColor={"white"}
                         resize={"none"}
