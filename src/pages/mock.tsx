@@ -30,7 +30,7 @@ export default function Mock(props: any) {
 
   }
 
-  const handleChange = (task: task) => {
+  const handleTaskUpdate = (task: task) => {
     const _tasks = tasks.map(t => {
       if (t.id === task.id) return task
       return t
@@ -100,7 +100,7 @@ export default function Mock(props: any) {
                 pr={[0, 6, 6]}
                 task={currentTask}
                 tags={tags}
-                onChange={handleChange}
+                handleTaskUpdate={handleTaskUpdate}
               />
             }
           </Flex>

@@ -2,21 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 import {
     Box,
     Wrap,
-    WrapItem, Editable,
-    Textarea,
-    EditablePreview,
-    EditableTextarea,
-    EditableInput
+    WrapItem,
 } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
 import { ExTextArea, ExInput } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
-    const { task, tags } = props
+    const { task, tags, handleTaskUpdate, ...restProps } = props
 
     return (
         <Box
-            {...props}
+            {...restProps}
         >
             <Box
                 bg={'white'}
@@ -42,6 +38,7 @@ export function Detail(props: any) {
 
                 <Box p={3}>
                     <ExInput
+                        handleTaskUpdate={handleTaskUpdate}
                         fontSize={"sm"}
                         fontWeight={"bold"}
                         task={task}

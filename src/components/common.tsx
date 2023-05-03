@@ -35,7 +35,7 @@ export function ExTextArea(props: any) {
     const [rows, setRows] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [val, setVal] = useState(task.detail);
-    
+
     useEffect(() => {
         setRows(task.detail.split('\n').length)
         setVal(task.detail)
@@ -86,14 +86,17 @@ export function ExTextArea(props: any) {
     )
 }
 export function ExInput(props: any) {
-    const { task, placeholder } = props;
+    const { task, placeholder, handleTaskUpdate, ...restProps } = props;
     const ref = useRef<HTMLTextAreaElement>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [val, setVal] = useState(task.label);
+    const [newTask, setNewTask] = useState(task);
 
     useEffect(() => {
+        setVal(task.label)
+        setNewTask(task)
         setIsLoading(true)
-    }, [])
+    }, [task])
 
     const handleChange = () => {
         if (ref.current) {
@@ -104,41 +107,44 @@ export function ExInput(props: any) {
     return (
         <>
             <Skeleton
-                {...props}
+                {...restProps}
                 w={"100%"}
                 size={10}
                 isLoaded={isLoading}
             >
-                <FormControl>
-                    <Input
-                        onSubmit={e => {
-                            console.log("asdfasd")
-                            e.preventDefault();
-                        }}
-                        {...props}
-                        w={"100%"}
-                        onChange={handleChange}
-                        value={val}
-                        outline={"none"}
-                        borderColor={"white"}
-                        resize={"none"}
-                        ref={ref}
-                        p={2}
-                        placeholder={placeholder}
-                        boxShadow={"none"}
-                        _hover={{
-                            p: "2",
-                            borderColor: "gray.400"
-                        }}
-                        _focus={{
-                            p: "2",
-                            bg: "gray.50",
-                            borderColor: "gray.400",
-                            boxShadow: "none",
-                        }}
-                    />
-                </FormControl>
-            </Skeleton>
+                <form
+                    onSubmit={e => {
+                        newTask.label = val                        
+                        handleTaskUpdate(newTask)
+                        e.preventDefault();
+                    }}>
+                    <FormControl >
+                        <Input
+                            {...restProps}
+                            w={"100%"}
+                            onChange={handleChange}
+                            value={val}
+                            outline={"none"}
+                            borderColor={"white"}
+                            resize={"none"}
+                            ref={ref}
+                            p={2}
+                            placeholder={placeholder}
+                            boxShadow={"none"}
+                            _hover={{
+                                p: "2",
+                                borderColor: "gray.400"
+                            }}
+                            _focus={{
+                                p: "2",
+                                bg: "gray.50",
+                                borderColor: "gray.400",
+                                boxShadow: "none",
+                            }}
+                        />
+                    </FormControl>
+                </form>
+            </Skeleton >
         </>
     )
 }
