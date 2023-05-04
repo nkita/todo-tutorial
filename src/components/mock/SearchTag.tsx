@@ -1,8 +1,13 @@
-import { Tag, TagLabel, TagCloseButton, TagLeftIcon } from '@chakra-ui/react'
+import { Tag, TagLabel, TagCloseButton, TagLeftIcon, useStatStyles } from '@chakra-ui/react'
 import { AttachmentIcon } from '@chakra-ui/icons'
+import { useEffect, useState } from 'react';
 
 export function SearchTag(props: any) {
-    const { tag, onClickTagClose, ...restProps } = props;
+    const { tag, onClickTagClose, isCloseEnabled = true, ...restProps } = props;
+    const [close, setClose] = useState(isCloseEnabled)
+    useEffect(() => {
+        setClose(isCloseEnabled)
+    }, [isCloseEnabled])
     const handleClickCloseButton = () => {
         onClickTagClose(tag.id)
     }
@@ -15,9 +20,11 @@ export function SearchTag(props: any) {
         >
             <TagLeftIcon as={AttachmentIcon} />
             <TagLabel>{tag.name}</ TagLabel>
-            <TagCloseButton
-                onClick={handleClickCloseButton}
-            />
+            {close &&
+                <TagCloseButton
+                    onClick={handleClickCloseButton}
+                />
+            }
         </Tag >
     )
 }

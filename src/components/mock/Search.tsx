@@ -18,7 +18,10 @@ export function Search(props: any) {
                         if (searchTags.includes(t.id)) {
                             return (
                                 <WrapItem key={t.id}>
-                                    <SearchTag tag={t} onClickTagClose={handleTagClose} bg={"blue.300"} />
+                                    <SearchTag
+                                        tag={t}
+                                        onClickTagClose={handleTagClose}
+                                        bg={"blue.300"} />
                                 </WrapItem>
                             )
                         }
@@ -26,7 +29,11 @@ export function Search(props: any) {
                 }
                 {searchTags.length === 0 &&
                     <WrapItem >
-                        <SearchTag tag={{ id: "000", name: "ALL" }} onClickTagClose={handleTagClose} bg={"red"}/>
+                        <SearchTag
+                            tag={{ id: "000", name: "ALL" }}
+                            isCloseEnabled={false}
+                            onClickTagClose={handleTagClose}
+                            bg={"red"} />
                     </WrapItem>
                 }
             </Wrap>
