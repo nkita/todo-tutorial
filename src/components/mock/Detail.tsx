@@ -47,6 +47,7 @@ export function Detail(props: any) {
                 </Box>
                 <Box p={3}>
                     <ExTextArea
+                        handleTaskUpdate={handleTaskUpdate}
                         fontSize={"sm"}
                         task={task}
                         placeholder="詳細を追加"

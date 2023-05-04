@@ -1,11 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import {
     Button,
-    FormControl,
     Textarea,
-    Skeleton,
     Input,
-    IconButton
 } from '@chakra-ui/react'
 
 export function SideButton(props: any) {
@@ -30,37 +27,41 @@ export function SideButton(props: any) {
 }
 
 export function ExTextArea(props: any) {
-    const { task, placeholder } = props;
+    const { task, placeholder, handleTaskUpdate, ...restProps } = props;
     const ref = useRef<HTMLTextAreaElement>(null);
     const [rows, setRows] = useState(1);
-    const [isLoading, setIsLoading] = useState(false);
-    const [val, setVal] = useState(task.detail);
+    const [detail, setDetail] = useState(task.detail);
+    const [newTask, setNewTask] = useState(task);
 
     useEffect(() => {
         setRows(task.detail.split('\n').length)
-        setVal(task.detail)
-        setIsLoading(true)
+        setDetail(task.detail)
+        setNewTask(task)
     }, [task])
 
     const handleChange = () => {
         if (ref.current) {
-            const va = ref.current.value;
-            setRows(va.split('\n').length)
-            setVal(va)
+            const v = ref.current.value;
+            setRows(v.split('\n').length)
+            setDetail(v)
         }
     }
+
+    const handleSubmit = (e: any) => {
+        newTask.detail = detail
+        handleTaskUpdate(newTask)
+        ref.current?.blur()
+        e.preventDefault();
+    }
+
     return (
         <>
-            <Skeleton
-                {...props}
-                w={"100%"}
-                size={10}
-                isLoaded={isLoading}
-            >
+            <form onSubmit={handleSubmit}>
                 <Textarea
-                    {...props}
+                    {...restProps}
+                    onBlur={handleSubmit}
                     w={"100%"}
-                    value={val}
+                    value={detail}
                     outline={"none"}
                     borderColor={"white"}
                     resize={"none"}
@@ -81,70 +82,59 @@ export function ExTextArea(props: any) {
                         boxShadow: "none",
                     }}
                 />
-            </Skeleton>
+            </form>
         </>
     )
 }
 export function ExInput(props: any) {
     const { task, placeholder, handleTaskUpdate, ...restProps } = props;
     const ref = useRef<HTMLTextAreaElement>(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [val, setVal] = useState(task.label);
+    const [label, setLabel] = useState(task.label);
     const [newTask, setNewTask] = useState(task);
 
     useEffect(() => {
-        setVal(task.label)
+        setLabel(task.label)
         setNewTask(task)
-        setIsLoading(true)
+        ref.current?.focus()
     }, [task])
 
-    const handleChange = () => {
-        if (ref.current) {
-            const va = ref.current.value;
-            setVal(va)
-        }
+    const handleChange = () => ref.current && setLabel(ref.current.value)
+
+    const handleSubmit = (e: any) => {
+        newTask.label = label
+        handleTaskUpdate(newTask)
+        ref.current?.blur()
+        e.preventDefault();
     }
     return (
         <>
-            <Skeleton
-                {...restProps}
-                w={"100%"}
-                size={10}
-                isLoaded={isLoading}
-            >
-                <form
-                    onSubmit={e => {
-                        newTask.label = val                        
-                        handleTaskUpdate(newTask)
-                        e.preventDefault();
-                    }}>
-                    <FormControl >
-                        <Input
-                            {...restProps}
-                            w={"100%"}
-                            onChange={handleChange}
-                            value={val}
-                            outline={"none"}
-                            borderColor={"white"}
-                            resize={"none"}
-                            ref={ref}
-                            p={2}
-                            placeholder={placeholder}
-                            boxShadow={"none"}
-                            _hover={{
-                                p: "2",
-                                borderColor: "gray.400"
-                            }}
-                            _focus={{
-                                p: "2",
-                                bg: "gray.50",
-                                borderColor: "gray.400",
-                                boxShadow: "none",
-                            }}
-                        />
-                    </FormControl>
-                </form>
-            </Skeleton >
+            <form
+                onSubmit={handleSubmit}>
+                <Input
+                    {...restProps}
+                    w={"100%"}
+                    onBlur={handleSubmit}
+                    onChange={handleChange}
+                    value={label}
+                    outline={"none"}
+                    borderColor={"white"}
+                    resize={"none"}
+                    ref={ref}
+                    p={2}
+                    placeholder={placeholder}
+                    boxShadow={"none"}
+                    _hover={{
+                        p: "2",
+                        borderColor: "gray.400"
+                    }}
+                    _focus={{
+                        p: "2",
+                        bg: "gray.50",
+                        borderColor: "gray.400",
+                        boxShadow: "none",
+                    }}
+                />
+            </form>
         </>
     )
 }
