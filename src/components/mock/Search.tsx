@@ -15,14 +15,19 @@ export function Search(props: any) {
             <Wrap>
                 {tags &&
                     tags.map((t: tag) => {
-                        if (searchTags.length != 0 || searchTags.includes(t.id)) {
+                        if (searchTags.includes(t.id)) {
                             return (
                                 <WrapItem key={t.id}>
-                                    <SearchTag tag={t} onClickTagClose={handleTagClose} />
+                                    <SearchTag tag={t} onClickTagClose={handleTagClose} bg={"blue.300"} />
                                 </WrapItem>
                             )
                         }
                     })
+                }
+                {searchTags.length === 0 &&
+                    <WrapItem >
+                        <SearchTag tag={{ id: "000", name: "ALL" }} onClickTagClose={handleTagClose} bg={"red"}/>
+                    </WrapItem>
                 }
             </Wrap>
         </HStack >

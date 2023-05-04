@@ -65,7 +65,7 @@ export function Detail(props: any) {
                                         if (t.id === tagid) {
                                             return (
                                                 <WrapItem key={t.id}>
-                                                    <SearchTag tag={t} onClickTagClose={handleTagClose} />
+                                                    <SearchTag tag={t} onClickTagClose={handleTagClose} bg={"blue.300"} />
                                                 </WrapItem>
                                             )
                                         }

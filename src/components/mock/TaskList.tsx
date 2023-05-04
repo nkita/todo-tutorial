@@ -7,7 +7,9 @@ export function TaskList(props: any) {
     const { tasks, handleTaskClick, currentTaskId, searchTags, ...restProps } = props;
     const [taskList, setTaskList] = useState(tasks)
     useEffect(() => {
-        setTaskList(tasks.filter((t: task) => searchTags.some((val: string) => t.tags.includes(val))))
+        searchTags.length === 0 ?
+            setTaskList(tasks) :
+            setTaskList(tasks.filter((t: task) => searchTags.some((val: string) => t.tags.includes(val))));
     }, [tasks, searchTags])
 
     return (
