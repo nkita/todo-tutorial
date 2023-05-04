@@ -10,7 +10,7 @@ import { AttachmentIcon, PlusSquareIcon } from '@chakra-ui/icons'
 import type { tag } from '../../pages/mock'
 
 export function Side(props: any) {
-    const { tags, ...restProps } = props
+    const { tags, searchTags, searchTagUpdate, ...restProps } = props
 
     return (
         <Box
@@ -63,7 +63,10 @@ export function Side(props: any) {
                                 return (
                                     <SideButton
                                         key={t.id}
+                                        tag={t}
                                         leftIcon={<AttachmentIcon />}
+                                        searchTags={searchTags}
+                                        searchTagUpdate={searchTagUpdate}
                                     >
                                         {t.name}
                                     </SideButton>

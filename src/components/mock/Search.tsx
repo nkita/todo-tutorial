@@ -4,10 +4,11 @@ import type { tag } from '../../pages/mock'
 
 
 export function Search(props: any) {
-    const { tags, searchTags, ...restProps } = props;
+    const { tags, searchTags, changeSearchTag, ...restProps } = props;
     const handleTagClose = (tagId: string) => {
-        console.log("Search:" + tagId)
+        changeSearchTag(searchTags.filter((t: string) => t !== tagId))
     }
+
     return (
         <HStack {...restProps}
             justifyContent={'space-between'}
@@ -32,7 +33,6 @@ export function Search(props: any) {
                         <SearchTag
                             tag={{ id: "000", name: "ALL" }}
                             isCloseEnabled={false}
-                            onClickTagClose={handleTagClose}
                             bg={"red"} />
                     </WrapItem>
                 }

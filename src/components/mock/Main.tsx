@@ -15,7 +15,15 @@ import {
 } from '.'
 
 export function Main(props: any) {
-    const { tags, tasks, handleTaskClick, currentTaskId, searchTags, ...restProps } = props;
+    const {
+        tags,
+        tasks,
+        handleTaskClick,
+        handleSearchTagUpdate,
+        currentTaskId,
+        searchTags,
+        ...restProps
+    } = props;
 
     return (
         <Box
@@ -45,6 +53,7 @@ export function Main(props: any) {
                 tags={tags}
                 pt={5}
                 searchTags={searchTags}
+                changeSearchTag={handleSearchTagUpdate}
             />
             <TaskList
                 tasks={tasks}

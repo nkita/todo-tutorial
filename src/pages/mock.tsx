@@ -39,6 +39,10 @@ export default function Mock(props: any) {
     })
     setTasks(_tasks)
   }
+
+  const handleSearchTagUpdate = (tags: string[]) => setSearchTags(tags)
+
+
   return (
     <>
       <Chakra cookies={cookies} theme={theme}>
@@ -78,7 +82,10 @@ export default function Mock(props: any) {
               minW={200}
               position={"fixed"}
               pt={"50px"}
-              tags={tags} />
+              tags={tags}
+              searchTags={searchTags}
+              searchTagUpdate={handleSearchTagUpdate}
+            />
             <Main
               minW={200}
               w={
@@ -93,6 +100,7 @@ export default function Mock(props: any) {
               searchTags={searchTags}
               currentTaskId={currentTaskId}
               handleTaskClick={onClickTask}
+              handleSearchTagUpdate={handleSearchTagUpdate}
             />
             {currentTask &&
               <Detail
@@ -132,7 +140,7 @@ const TAGS = [
   { id: "004", name: "仕事" },
 ]
 
-const SEARCH_TAGS= []
+const SEARCH_TAGS = ["001", "002", "003", "004"]
 
 const TASKS = [
   { id: "003", detail: "まずはどこから？\n ここからスタート \n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数", label: "旅行の計画を建てる", tags: ["001"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },

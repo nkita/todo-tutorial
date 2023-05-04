@@ -6,6 +6,8 @@ import {
 } from '@chakra-ui/react'
 
 export function SideButton(props: any) {
+    const { tag, searchTags, searchTagUpdate, ...restProps } = props;
+    const handleOnClick = (id: string) => searchTagUpdate([id])
     return (
         <>
             <Button
@@ -16,7 +18,8 @@ export function SideButton(props: any) {
                 w={170}
                 fontSize={".875em"}
                 _hover={{ bg: 'blue.200', color: "white" }}
-                {...props}
+                {...restProps}
+                onClick={e => handleOnClick(tag.id)}
             >
                 {props.children}
             </Button>
