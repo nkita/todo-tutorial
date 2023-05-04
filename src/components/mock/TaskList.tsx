@@ -1,9 +1,15 @@
 import { Box, VStack } from '@chakra-ui/react'
 import Task from './Task';
 import type { task } from '../../pages/mock'
+import { useEffect, useState } from 'react';
 
 export function TaskList(props: any) {
-    const { tasks, handleTaskClick, currentTaskId, ...restProps } = props;
+    const { tasks, handleTaskClick, currentTaskId, searchTags, ...restProps } = props;
+    const [taskList, setTaskList] = useState(tasks)
+    useEffect(() => {
+        setTaskList(tasks.filter((t: task) => searchTags.some((val: string) => t.tags.includes(val))))
+    }, [tasks, searchTags])
+
     return (
         <Box
             {...restProps}
@@ -11,8 +17,8 @@ export function TaskList(props: any) {
             <VStack
                 spacing={2}
             >
-                {tasks &&
-                    tasks.map((t: task) => {
+                {taskList &&
+                    taskList.map((t: task) => {
                         return (
                             <Task
                                 handleTaskClick={handleTaskClick}

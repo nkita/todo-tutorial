@@ -9,7 +9,10 @@ import { ExTextArea, ExInput } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
     const { task, tags, handleTaskUpdate, ...restProps } = props
-
+    const handleTagClose = (tagId: string) => {
+        task.tags = task.tags.filter((t: string) => t !== tagId)
+        handleTaskUpdate(task)
+    }
     return (
         <Box
             {...restProps}
@@ -62,7 +65,7 @@ export function Detail(props: any) {
                                         if (t.id === tagid) {
                                             return (
                                                 <WrapItem key={t.id}>
-                                                    <SearchTag tagName={t.name} />
+                                                    <SearchTag tag={t} onClickTagClose={handleTagClose} />
                                                 </WrapItem>
                                             )
                                         }

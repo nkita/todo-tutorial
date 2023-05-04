@@ -13,8 +13,10 @@ import {
     Search,
     TaskList
 } from '.'
+
 export function Main(props: any) {
-    const { tags, tasks, handleTaskClick, currentTaskId, ...restProps } = props;
+    const { tags, tasks, handleTaskClick, currentTaskId, searchTags, ...restProps } = props;
+
     return (
         <Box
             {...restProps}
@@ -42,11 +44,13 @@ export function Main(props: any) {
             <Search
                 tags={tags}
                 pt={5}
+                searchTags={searchTags}
             />
             <TaskList
                 tasks={tasks}
                 currentTaskId={currentTaskId}
                 handleTaskClick={handleTaskClick}
+                searchTags={searchTags}
                 pt={5} />
         </Box >
     )

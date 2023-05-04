@@ -2,7 +2,10 @@ import { Tag, TagLabel, TagCloseButton, TagLeftIcon } from '@chakra-ui/react'
 import { AttachmentIcon } from '@chakra-ui/icons'
 
 export function SearchTag(props: any) {
-    const { tagName } = props;
+    const { tag, onClickTagClose } = props;
+    const handleClickCloseButton = () => {
+        onClickTagClose(tag.id)
+    }
     return (
         <Tag
             size={['sm', 'sm']}
@@ -12,8 +15,10 @@ export function SearchTag(props: any) {
             bg={"blue.300"}
         >
             <TagLeftIcon as={AttachmentIcon} />
-            <TagLabel>{tagName}</ TagLabel>
-            <TagCloseButton />
+            <TagLabel>{tag.name}</ TagLabel>
+            <TagCloseButton
+                onClick={handleClickCloseButton}
+            />
         </Tag >
     )
 }

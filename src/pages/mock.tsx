@@ -9,6 +9,7 @@ import {
 import theme from '../components/theme';
 import {
   Flex,
+  Box
 } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
 
@@ -16,7 +17,8 @@ export default function Mock(props: any) {
   const { cookies } = props;
   const t = "Mock | Todo App Tutorial";
   const [tasks, setTasks] = useState(TASKS)
-  const [tags, setTags] = useState(TAGS)
+  const [tags, setTags] = useState<tag[]>(TAGS)
+  const [searchTags, setSearchTags] = useState(SEARCH_TAGS)
   const [currentTask, setCurrentTask] = useState<task | null>(null)
   const [currentTaskId, setCurrentTaskId] = useState<string | null>(null)
 
@@ -88,6 +90,7 @@ export default function Mock(props: any) {
               pt={20}
               tags={tags}
               tasks={tasks}
+              searchTags={searchTags}
               currentTaskId={currentTaskId}
               handleTaskClick={onClickTask}
             />
@@ -128,6 +131,8 @@ const TAGS = [
   { id: "003", name: "買い物" },
   { id: "004", name: "仕事" },
 ]
+
+const SEARCH_TAGS = ["001", "002", "003", "004"]
 
 const TASKS = [
   { id: "003", detail: "まずはどこから？\n ここからスタート \n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数\n　改行が複数", label: "旅行の計画を建てる", tags: ["001"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
