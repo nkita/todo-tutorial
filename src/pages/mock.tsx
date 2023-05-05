@@ -43,6 +43,7 @@ export default function Mock(props: any) {
   const handleSearchTagUpdate = (tags: string[]) => setSearchTags(tags)
 
 
+
   return (
     <>
       <Chakra cookies={cookies} theme={theme}>

@@ -40,11 +40,18 @@ export function Side(props: any) {
                         p={6}
                     >タスク
                     </Heading>
-                    <SideButton>
+                    <SideButton
+                        tag={{ id: "000", name: "ALL" }}
+                        searchTags={searchTags}
+                        searchTagUpdate={searchTagUpdate}
+                    >
                         すべて
                     </SideButton>
-                    <SideButton>
-                        重要
+                    <SideButton
+                        searchTags={searchTags}
+                        searchTagUpdate={searchTagUpdate}
+                    >
+                        タグなし
                     </SideButton>
                     <SideButton>
                         ブックマーク

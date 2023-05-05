@@ -7,7 +7,8 @@ import {
 
 export function SideButton(props: any) {
     const { tag, searchTags, searchTagUpdate, ...restProps } = props;
-    const handleOnClick = (id: string) => searchTagUpdate([id])
+    const handleOnClick = (id: string | null) => searchTagUpdate(id ? [id] : [])
+
     return (
         <>
             <Button
@@ -19,7 +20,7 @@ export function SideButton(props: any) {
                 fontSize={".875em"}
                 _hover={{ bg: 'blue.200', color: "white" }}
                 {...restProps}
-                onClick={e => handleOnClick(tag.id)}
+                onClick={e => handleOnClick(tag ? tag.id : null)}
             >
                 {props.children}
             </Button>

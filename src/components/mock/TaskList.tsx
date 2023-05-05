@@ -7,9 +7,15 @@ export function TaskList(props: any) {
     const { tasks, handleTaskClick, currentTaskId, searchTags, ...restProps } = props;
     const [taskList, setTaskList] = useState(tasks)
     useEffect(() => {
-        searchTags.length === 0 ?
-            setTaskList(tasks) :
-            setTaskList(tasks.filter((t: task) => searchTags.some((val: string) => t.tags.includes(val))));
+        console.log(tasks, searchTags)
+        if (searchTags.length > 0) {
+            searchTags.length === 1 && searchTags[0] === "000" ?
+                setTaskList(tasks) :
+                setTaskList(tasks.filter((t: task) => searchTags.some((val: string) => t.tags.includes(val))));
+        } else {
+            //タグなし
+            setTaskList(tasks.filter((t: task) => t.tags.length === 0))
+        }
     }, [tasks, searchTags])
 
     return (
