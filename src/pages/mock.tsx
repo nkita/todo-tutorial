@@ -39,7 +39,11 @@ export default function Mock(props: any) {
     })
     setTasks(_tasks)
   }
-
+  const handleTaskAdd = (task: task) => {
+    tasks.unshift(task)
+    const _tasks = tasks
+    setTasks(_tasks)
+  }
   const handleSearchTagUpdate = (tags: string[]) => setSearchTags(tags)
 
 
@@ -101,6 +105,7 @@ export default function Mock(props: any) {
               searchTags={searchTags}
               currentTaskId={currentTaskId}
               handleTaskClick={onClickTask}
+              handleTaskAdd={handleTaskAdd}
               handleSearchTagUpdate={handleSearchTagUpdate}
             />
             {currentTask &&

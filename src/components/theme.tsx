@@ -9,7 +9,7 @@ const config: ThemeConfig = {
 const styles = {
   global: {
     'html, body': {
-      bg: 'blue.50'
+      bg: 'blue.50',
     },
   },
 }

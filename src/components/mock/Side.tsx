@@ -19,15 +19,26 @@ export function Side(props: any) {
             <VStack
                 h={"100vh"}
                 pb={20}
-                overflow={"scroll"}
-                overflowX={"hidden"}
+                className='scroll_bar'
                 sx={{
+                    overflow: "scroll",
+                    overflowX: "hidden",
+                    '_hover': {
+                        '&::-webkit-scrollbar': {
+                            width: "5px",
+                            borderRadius: '5'
+                        },
+                        '&::-webkit-scrollbar-thumb': {
+                            backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                            borderRadius: '5'
+                        },
+                    },
                     '&::-webkit-scrollbar': {
                         width: "5px",
                         borderRadius: '5'
                     },
                     '&::-webkit-scrollbar-thumb': {
-                        backgroundColor: `rgba(0, 0, 0, 0.05)`,
+                        backgroundColor: `rgba(0, 0, 0, 0.00)`,
                         borderRadius: '5'
                     },
                 }}

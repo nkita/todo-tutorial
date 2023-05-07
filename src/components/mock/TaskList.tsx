@@ -7,7 +7,6 @@ export function TaskList(props: any) {
     const { tasks, handleTaskClick, currentTaskId, searchTags, ...restProps } = props;
     const [taskList, setTaskList] = useState(tasks)
     useEffect(() => {
-        console.log(tasks, searchTags)
         if (searchTags.length > 0) {
             searchTags.length === 1 && searchTags[0] === "000" ?
                 setTaskList(tasks) :
