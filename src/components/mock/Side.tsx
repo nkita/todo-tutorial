@@ -53,9 +53,9 @@ export function Side(props: any) {
                     >
                         タグなし
                     </SideButton>
-                    <SideButton>
+                    {/* <SideButton>
                         ブックマーク
-                    </SideButton>
+                    </SideButton> */}
                     <Heading
                         size={"md"}
                         textAlign={"left"}

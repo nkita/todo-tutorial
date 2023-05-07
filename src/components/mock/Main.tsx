@@ -36,15 +36,23 @@ export function Main(props: any) {
                     rounded={10}
                     bg={"gray.50"}
                     placeholder='Add task...'
+                    _hover={{
+                        borderColor: "gray.400"
+                    }}
+                    _focus={{
+                        bg: "gray.50",
+                        borderColor: "gray.400",
+                        boxShadow: "none",
+                    }}
                 />
                 <InputRightElement width='6rem'>
                     <LinkC width='4rem' fontSize={10}>
                         詳細を追加
                     </LinkC>
                     <IconButton
-                        bg={"green.200"}
+                        variant={"ghost"}
                         isRound={true}
-                        size={"xs"}
+                        size={"sm"}
                         mr={2}
                         aria-label="Add Task" icon={<SmallAddIcon />} />
                 </InputRightElement>
