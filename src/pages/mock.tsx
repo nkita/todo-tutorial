@@ -96,7 +96,6 @@ export default function Mock(props: any) {
               w={
                 currentTask ? ["100vw", "100vw", "65vw"] : "100vw"
               }
-              h={"95vh"}
               pl={[15, 15, 210]}
               pr={[3, 3, 3]}
               pt={20}

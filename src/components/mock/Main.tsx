@@ -99,7 +99,6 @@ export function Main(props: any) {
                 currentTaskId={currentTaskId}
                 handleTaskClick={handleTaskClick}
                 searchTags={searchTags}
-                h={"90%"}
                 sx={{
                     overflow: "scroll",
                     overflowX: "hidden",

@@ -15,7 +15,7 @@ export function TaskList(props: any) {
             //タグなし
             setTaskList(tasks.filter((t: task) => t.tags.length === 0))
         }
-    }, [tasks, searchTags])
+    }, [tasks, searchTags, taskList])
 
     return (
         <Box
