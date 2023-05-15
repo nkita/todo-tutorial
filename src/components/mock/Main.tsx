@@ -14,7 +14,7 @@ import {
     TaskList
 } from '.'
 import type { task } from '../../pages/mock'
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function Main(props: any) {
     const [value, setValue] = useState("")

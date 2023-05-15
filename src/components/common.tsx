@@ -3,30 +3,59 @@ import {
     Button,
     Textarea,
     Input,
+    Box,
+    Flex,
+    IconButton,
 } from '@chakra-ui/react'
+import { AddIcon } from "@chakra-ui/icons";
 
 export function SideButton(props: any) {
-    const { tag, searchTags, searchTagUpdate, ...restProps } = props;
+    const { tag, isSearchTag, searchTags, searchTagUpdate, leftIcon, ...restProps } = props;
     const handleOnClick = (id: string | null) => searchTagUpdate(id ? [id] : [])
+    const handleOnAddClick = (id: string | null) => {
+        // 「すべて」のタグが含まれていた場合一旦削除
+        const _searchTags = searchTags.filter((id: string) => id !== "000")
+        searchTagUpdate(Array.from(new Set([..._searchTags, id])))
+    }
 
     return (
         <>
-            <Button
-                ml={3}
-                colorScheme='teal'
-                variant='ghost'
-                justifyContent="flex-start"
-                w={170}
-                fontSize={".875em"}
+            <Flex
+                w={"100%"}
+                pl={5}
+                pr={5}
+                lineHeight={8}
+                borderRadius={3}
                 _hover={{ bg: 'blue.200', color: "white" }}
-                {...restProps}
-                onClick={e => handleOnClick(tag ? tag.id : null)}
+                justifyContent={"space-between"}
+                alignItems={"baseline"}
             >
-                {props.children}
-            </Button>
-
+                <Box
+                    pr={3}
+                >
+                    {leftIcon}
+                </Box>
+                <Box
+                    w={"100%"}
+                    cursor={"pointer"}
+                    onClick={e => handleOnClick(tag ? tag.id : null)}
+                >
+                    {props.children}
+                </Box>
+                {isSearchTag &&
+                    <IconButton
+                        colorScheme='blue'
+                        variant={"ghost"}
+                        aria-label='Add Search Tag'
+                        fontSize={"10px"}
+                        size={"xs"}
+                        isRound={true}
+                        onClick={e => handleOnAddClick(tag.id)}
+                        icon={<AddIcon color={"blackAlpha.500"} />}
+                    />
+                }
+            </Flex >
         </>
-
     )
 }
 
@@ -141,4 +170,40 @@ export function ExInput(props: any) {
             </form>
         </>
     )
+}
+
+export function InputTag(props: any) {
+    const [isOpen, setIsOpen] = useState(true);
+
+    return (
+        <Box
+            position={"relative"}
+        >
+            {!isOpen &&
+                <Button
+                    h={"10px"}
+                    onClick={e => setIsOpen(true)}
+                >
+                    click
+                </Button>
+            }
+            {isOpen &&
+                <>
+                    <Button
+                        h={"10px"}
+                        onClick={e => setIsOpen(false)}
+                    >click
+                    </Button>
+                    <Box
+                        position={"fixed"}
+                        w={10}
+                        h={200}
+                        bg={"red"}
+                        boxShadow={"dark-lg"}
+                    >
+                    </Box>
+                </>
+            }
+        </Box>
+    );
 }

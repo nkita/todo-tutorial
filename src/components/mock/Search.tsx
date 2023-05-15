@@ -2,6 +2,7 @@ import { HStack, Wrap, WrapItem } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
 import type { tag } from '../../pages/mock'
 import { useEffect } from 'react';
+import { InputTag } from '../common'
 
 
 export function Search(props: any) {
@@ -30,19 +31,27 @@ export function Search(props: any) {
                     </WrapItem>
                 }
                 {searchTags.length >= 1 && searchTags[0] !== "000" && tags &&
-                    tags.map((t: tag) => {
-                        if (searchTags.includes(t.id)) {
-                            return (
-                                <WrapItem key={t.id}>
-                                    <SearchTag
-                                        tag={t}
-                                        onClickTagClose={handleTagClose}
-                                        bg={"blue.300"} />
-                                </WrapItem>
-                            )
-                        }
+                    searchTags.map((stagid: string) => {
+                        return tags.map((t: tag) => {
+                            if (t.id === stagid) {
+                                return (
+                                    <WrapItem key={t.id}>
+                                        <SearchTag
+                                            tag={t}
+                                            onClickTagClose={handleTagClose}
+                                            bg={"blue.300"} />
+                                    </WrapItem>
+                                )
+                            }
+                        })
                     })
                 }
+                {/* Todo add tag */}
+                {/* <WrapItem>
+                    <InputTag
+                        line
+                    ></InputTag>
+                </WrapItem> */}
             </Wrap>
         </HStack >
     )

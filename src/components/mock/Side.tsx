@@ -3,7 +3,6 @@ import {
     Text,
     Heading,
     VStack,
-    IconButton,
 } from '@chakra-ui/react'
 import { SideButton } from '../common'
 import { AttachmentIcon, PlusSquareIcon } from '@chakra-ui/icons'
@@ -17,6 +16,7 @@ export function Side(props: any) {
             {...restProps}
         >
             <VStack
+                w={"100%"}
                 h={"100vh"}
                 pb={20}
                 className='scroll_bar'
@@ -43,15 +43,17 @@ export function Side(props: any) {
                     },
                 }}
             >
-
-                <Box>
+                <Box
+                    w={"100%"}
+                >
                     <Heading
                         size={"md"}
                         textAlign={"left"}
-                        p={6}
+                        p={5}
                     >タスク
                     </Heading>
                     <SideButton
+                        isSearchTag={false}
                         tag={{ id: "000", name: "ALL" }}
                         searchTags={searchTags}
                         searchTagUpdate={searchTagUpdate}
@@ -59,6 +61,7 @@ export function Side(props: any) {
                         すべて
                     </SideButton>
                     <SideButton
+                        isSearchTag={false}
                         searchTags={searchTags}
                         searchTagUpdate={searchTagUpdate}
                     >
@@ -70,7 +73,7 @@ export function Side(props: any) {
                     <Heading
                         size={"md"}
                         textAlign={"left"}
-                        p={6}
+                        p={5}
                     >タグ</Heading>
                     <Box>
                         {!tags &&
@@ -85,6 +88,7 @@ export function Side(props: any) {
                                         leftIcon={<AttachmentIcon />}
                                         searchTags={searchTags}
                                         searchTagUpdate={searchTagUpdate}
+                                        isSearchTag={true}
                                     >
                                         {t.name}
                                     </SideButton>
@@ -93,7 +97,7 @@ export function Side(props: any) {
                         }
                     </Box>
                 </Box>
-            </VStack>
-        </Box>
+            </VStack >
+        </Box >
     )
 }
