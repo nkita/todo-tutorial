@@ -33,12 +33,13 @@ export function Main(props: any) {
     const handleChange = () => ref.current && setValue(ref.current.value)
 
     const handleSubmit = (e: any) => {
+        const _searchTags = searchTags.filter((id: string) => id !== "000")
         if (value) {
             const task = {
                 id: tasks.length + 1,
                 label: value,
                 detail: "",
-                tags: [],
+                tags: _searchTags,
                 limitDate: "2023-06-10",
                 createDate: "2023-04-10 23:10:10",
                 updateDate: "2023-05-10"
@@ -74,11 +75,9 @@ export function Main(props: any) {
                         }}
                         onChange={handleChange}
                     />
-                    <InputRightElement width='6rem'>
-                        <LinkC width='4rem' fontSize={10}>
-                            詳細を追加
-                        </LinkC>
+                    <InputRightElement>
                         <IconButton
+                            onClick={handleSubmit}
                             variant={"ghost"}
                             isRound={true}
                             size={"sm"}
