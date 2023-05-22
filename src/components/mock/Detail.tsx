@@ -5,14 +5,22 @@ import {
     WrapItem,
 } from '@chakra-ui/react'
 import { SearchTag } from './SearchTag'
-import { ExTextArea, ExInput } from '../common'
+import { ExTextArea, ExInput, InputTag } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
     const { task, tags, handleTaskUpdate, ...restProps } = props
+    const setTags = tags.filter((t: tag) => task.tags.includes(t.id));
+    const unsetTags = tags.filter((t: tag) => !task.tags.includes(t.id));
+
     const handleTagClose = (tagId: string) => {
         task.tags = task.tags.filter((t: string) => t !== tagId)
         handleTaskUpdate(task)
     }
+    const taskTagUpdate = (tags: string[]) => {
+        task.tags = tags
+        handleTaskUpdate(task)
+    }
+
     return (
         <Box
             {...restProps}
@@ -57,19 +65,19 @@ export function Detail(props: any) {
                     />
                 </Box>
                 <Box p={4}>
-                    <Wrap>
-                        {task.tags &&
-                            task.tags.map((tagid: string) => {
+                    <InputTag
+                        setTags={setTags}
+                        unsetTags={unsetTags}
+                        task={task}
+                        taskTagUpdate={taskTagUpdate}
+                    />
+                    <Wrap pt={3}>
+                        {setTags &&
+                            setTags.map((t: tag) => {
                                 return (
-                                    tags.map((t: tag) => {
-                                        if (t.id === tagid) {
-                                            return (
-                                                <WrapItem key={t.id}>
-                                                    <SearchTag tag={t} onClickTagClose={handleTagClose} bg={"blue.300"} />
-                                                </WrapItem>
-                                            )
-                                        }
-                                    })
+                                    <WrapItem key={t.id}>
+                                        <SearchTag tag={t} onClickTagClose={handleTagClose} bg={"blue.300"} />
+                                    </WrapItem>
                                 )
                             })
                         }

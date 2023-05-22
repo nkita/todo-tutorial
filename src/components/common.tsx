@@ -6,8 +6,19 @@ import {
     Box,
     Flex,
     IconButton,
+    PopoverTrigger,
+    Popover,
+    PopoverArrow,
+    PopoverCloseButton,
+    PopoverHeader,
+    PopoverBody,
+    PopoverContent,
+    List,
+    ListItem,
+    ListIcon
 } from '@chakra-ui/react'
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, CheckCircleIcon } from "@chakra-ui/icons";
+
 
 export function SideButton(props: any) {
     const { tag, isSearchTag, searchTags, searchTagUpdate, leftIcon, ...restProps } = props;
@@ -173,37 +184,84 @@ export function ExInput(props: any) {
 }
 
 export function InputTag(props: any) {
-    const [isOpen, setIsOpen] = useState(true);
+    const { setTags, unsetTags, taskTagUpdate } = props
+    const [isOpen, setIsOpen] = useState(false);
+    const ref = useRef<HTMLInputElement>(null);
+
+    useEffect(() => {
+        if (ref.current) ref.current.value = ""
+    }, [isOpen])
+
+    const handleTagAdd = (tagid: string) => taskTagUpdate([tagid, ...setTags.map((m: any) => m.id)])
+    const handleTagDelete = (tagid: string) => taskTagUpdate([...setTags.map((m: any) => m.id).filter((m: string) => m !== tagid)])
 
     return (
-        <Box
-            position={"relative"}
+        <Popover
+            initialFocusRef={ref}
         >
-            {!isOpen &&
+            <PopoverTrigger>
                 <Button
-                    h={"10px"}
+                    colorScheme={"twitter"}
+                    size={"xs"}
+                    outline={"none"}
                     onClick={e => setIsOpen(true)}
-                >
-                    click
-                </Button>
-            }
-            {isOpen &&
-                <>
-                    <Button
-                        h={"10px"}
-                        onClick={e => setIsOpen(false)}
-                    >click
-                    </Button>
+                >Add tag</Button>
+            </PopoverTrigger>
+            <PopoverContent>
+                <PopoverArrow />
+                <PopoverCloseButton />
+                <PopoverHeader>
+                    <Input
+                        w={"90%"}
+                        ref={ref}
+                        size={"sm"}
+                    />
+                </PopoverHeader>
+                <PopoverBody>
                     <Box
-                        position={"fixed"}
-                        w={10}
-                        h={200}
-                        bg={"red"}
-                        boxShadow={"dark-lg"}
+                        maxH={300}
+                        overflow={"scroll"}
                     >
+                        <List spacing={1}>
+                            {unsetTags &&
+                                unsetTags.map((m: any) => {
+                                    return (
+                                        <ListItem
+                                            key={m.id}
+                                            _hover={{ bg: "blue.50" }}
+                                            cursor={"pointer"}
+                                            p={2}
+                                            fontSize={"sm"}
+                                            onClick={e => handleTagAdd(m.id)}
+                                        >
+                                            <ListIcon as={AddIcon} color={"blue.300"} />
+                                            {m.name}
+                                        </ListItem>
+                                    )
+                                })
+                            }
+                            {setTags &&
+                                setTags.map((m: any) => {
+                                    return (
+                                        <ListItem
+                                            key={m.id}
+                                            _hover={{ bg: "blue.50" }}
+                                            cursor={"pointer"}
+                                            p={2}
+                                            fontSize={"sm"}
+                                            onClick={e => handleTagDelete(m.id)}
+                                        >
+                                            <ListIcon as={CheckCircleIcon} color={"blue.300"} />
+                                            {m.name}
+                                        </ListItem>
+                                    )
+                                })
+                            }
+                        </List>
                     </Box>
-                </>
-            }
-        </Box>
+                </PopoverBody>
+            </PopoverContent>
+        </Popover>
+
     );
 }

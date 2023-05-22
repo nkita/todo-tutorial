@@ -46,12 +46,6 @@ export function Search(props: any) {
                         })
                     })
                 }
-                {/* Todo add tag */}
-                {/* <WrapItem>
-                    <InputTag
-                        line
-                    ></InputTag>
-                </WrapItem> */}
             </Wrap>
         </HStack >
     )
