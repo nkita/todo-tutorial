@@ -15,9 +15,11 @@ import {
     PopoverContent,
     List,
     ListItem,
-    ListIcon
+    ListIcon,
+    Kbd,
 } from '@chakra-ui/react'
-import { AddIcon, CheckCircleIcon } from "@chakra-ui/icons";
+import { AddIcon, CheckCircleIcon, AttachmentIcon } from "@chakra-ui/icons";
+import Todo from '@/pages/dndkit';
 
 
 export function SideButton(props: any) {
@@ -184,20 +186,42 @@ export function ExInput(props: any) {
 }
 
 export function InputTag(props: any) {
-    const { setTags, unsetTags, taskTagUpdate } = props
+    const { setTags, unsetTags, tagAdd, tags, taskTagUpdate } = props
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLInputElement>(null);
+    const [keyword, setKeyword] = useState("");
+    const [enableAddTag, setEnableAddTag] = useState(false);
 
-    useEffect(() => {
+    const keywordRest = () => {
         if (ref.current) ref.current.value = ""
-    }, [isOpen])
-
+        setKeyword("")
+    }
     const handleTagAdd = (tagid: string) => taskTagUpdate([tagid, ...setTags.map((m: any) => m.id)])
     const handleTagDelete = (tagid: string) => taskTagUpdate([...setTags.map((m: any) => m.id).filter((m: string) => m !== tagid)])
-
+    const handleNewTagAdd = () => {
+        if (ref.current && ref.current.value !== "") {
+            const id = tags.length + 1
+            tagAdd({
+                id: id,
+                name: ref.current.value
+            })
+            handleTagAdd(id)
+            ref.current.value = "";
+        }
+    }
+    const handeOnChangeKeyword = (e: any) => {
+        setKeyword(e.currentTarget.value)
+        const flg = tags.filter((t: any) => t.name === e.currentTarget.value)
+        setEnableAddTag((flg.length === 0 && keyword !== "") ? true : false)
+    }
+    const handleOnSubmit = (e: any) => {
+        if (enableAddTag) handleNewTagAdd()
+        e.preventDefault();
+    }
     return (
         <Popover
             initialFocusRef={ref}
+            onOpen={keywordRest}
         >
             <PopoverTrigger>
                 <Button
@@ -211,11 +235,14 @@ export function InputTag(props: any) {
                 <PopoverArrow />
                 <PopoverCloseButton />
                 <PopoverHeader>
-                    <Input
-                        w={"90%"}
-                        ref={ref}
-                        size={"sm"}
-                    />
+                    <form onSubmit={e => handleOnSubmit(e)}>
+                        <Input
+                            w={"90%"}
+                            ref={ref}
+                            size={"sm"}
+                            onChange={e => handeOnChangeKeyword(e)}
+                        />
+                    </form>
                 </PopoverHeader>
                 <PopoverBody>
                     <Box
@@ -223,38 +250,54 @@ export function InputTag(props: any) {
                         overflow={"scroll"}
                     >
                         <List spacing={1}>
+                            {enableAddTag &&
+                                <ListItem
+                                    _hover={{ bg: "blue.50" }}
+                                    cursor={"pointer"}
+                                    p={2}
+                                    fontSize={"sm"}
+                                    onClick={e => handleNewTagAdd()}
+                                >
+                                    <ListIcon as={AddIcon} color={"blue.300"} />
+                                    Add New Tag. (press <Kbd>enter</Kbd>)
+                                </ListItem>
+                            }
                             {unsetTags &&
                                 unsetTags.map((m: any) => {
-                                    return (
-                                        <ListItem
-                                            key={m.id}
-                                            _hover={{ bg: "blue.50" }}
-                                            cursor={"pointer"}
-                                            p={2}
-                                            fontSize={"sm"}
-                                            onClick={e => handleTagAdd(m.id)}
-                                        >
-                                            <ListIcon as={AddIcon} color={"blue.300"} />
-                                            {m.name}
-                                        </ListItem>
-                                    )
+                                    if (!keyword || ~m.name.indexOf(keyword)) {
+                                        return (
+                                            <ListItem
+                                                key={m.id}
+                                                _hover={{ bg: "blue.50" }}
+                                                cursor={"pointer"}
+                                                p={2}
+                                                fontSize={"sm"}
+                                                onClick={e => handleTagAdd(m.id)}
+                                            >
+                                                <ListIcon as={AttachmentIcon} color={"blue.300"} />
+                                                {m.name}
+                                            </ListItem>
+                                        )
+                                    }
                                 })
                             }
                             {setTags &&
                                 setTags.map((m: any) => {
-                                    return (
-                                        <ListItem
-                                            key={m.id}
-                                            _hover={{ bg: "blue.50" }}
-                                            cursor={"pointer"}
-                                            p={2}
-                                            fontSize={"sm"}
-                                            onClick={e => handleTagDelete(m.id)}
-                                        >
-                                            <ListIcon as={CheckCircleIcon} color={"blue.300"} />
-                                            {m.name}
-                                        </ListItem>
-                                    )
+                                    if (!keyword || ~m.name.indexOf(keyword)) {
+                                        return (
+                                            <ListItem
+                                                key={m.id}
+                                                _hover={{ bg: "blue.50" }}
+                                                cursor={"pointer"}
+                                                p={2}
+                                                fontSize={"sm"}
+                                                onClick={e => handleTagDelete(m.id)}
+                                            >
+                                                <ListIcon as={CheckCircleIcon} color={"blue.300"} />
+                                                {m.name}
+                                            </ListItem>
+                                        )
+                                    }
                                 })
                             }
                         </List>

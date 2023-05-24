@@ -8,17 +8,17 @@ import { SearchTag } from './SearchTag'
 import { ExTextArea, ExInput, InputTag } from '../common'
 import type { task, tag } from '../../pages/mock'
 export function Detail(props: any) {
-    const { task, tags, handleTaskUpdate, ...restProps } = props
+    const { task, tags, taskUpdate, tagAdd, ...restProps } = props
     const setTags = tags.filter((t: tag) => task.tags.includes(t.id));
     const unsetTags = tags.filter((t: tag) => !task.tags.includes(t.id));
 
     const handleTagClose = (tagId: string) => {
         task.tags = task.tags.filter((t: string) => t !== tagId)
-        handleTaskUpdate(task)
+        taskUpdate(task)
     }
     const taskTagUpdate = (tags: string[]) => {
         task.tags = tags
-        handleTaskUpdate(task)
+        taskUpdate(task)
     }
 
     return (
@@ -49,7 +49,7 @@ export function Detail(props: any) {
 
                 <Box p={3}>
                     <ExInput
-                        handleTaskUpdate={handleTaskUpdate}
+                        handleTaskUpdate={taskUpdate}
                         fontSize={"sm"}
                         fontWeight={"bold"}
                         task={task}
@@ -58,7 +58,7 @@ export function Detail(props: any) {
                 </Box>
                 <Box p={3}>
                     <ExTextArea
-                        handleTaskUpdate={handleTaskUpdate}
+                        handleTaskUpdate={taskUpdate}
                         fontSize={"sm"}
                         task={task}
                         placeholder="詳細を追加"
@@ -70,6 +70,8 @@ export function Detail(props: any) {
                         unsetTags={unsetTags}
                         task={task}
                         taskTagUpdate={taskTagUpdate}
+                        tagAdd={tagAdd}
+                        tags={tags}
                     />
                     <Wrap pt={3}>
                         {setTags &&

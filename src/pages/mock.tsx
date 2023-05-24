@@ -39,6 +39,7 @@ export default function Mock(props: any) {
     setTasks(_tasks)
   }
   const handleTaskAdd = (task: task) => setTasks([task, ...tasks])
+  const handleTagAdd = (tag: tag) => setTags([tag, ...tags])
 
   const handleSearchTagUpdate = (tags: string[]) => setSearchTags(tags)
 
@@ -110,7 +111,8 @@ export default function Mock(props: any) {
                 pr={[0, 6, 6]}
                 task={currentTask}
                 tags={tags}
-                handleTaskUpdate={handleTaskUpdate}
+                taskUpdate={handleTaskUpdate}
+                tagAdd={handleTagAdd}
               />
             }
           </Flex>
