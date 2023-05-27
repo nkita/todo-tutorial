@@ -17,6 +17,7 @@ export default function Mock(props: any) {
   const { cookies } = props;
   const t = "Mock | Todo App Tutorial";
   const [tasks, setTasks] = useState(TASKS)
+  const [completedTasks, setCompletedTasks] = useState(COMPLETEDTASKS)
   const [tags, setTags] = useState<tag[]>(TAGS)
   const [searchTags, setSearchTags] = useState(SEARCH_TAGS)
   const [currentTask, setCurrentTask] = useState<task | null>(null)
@@ -42,6 +43,15 @@ export default function Mock(props: any) {
   const handleTagAdd = (tag: tag) => setTags([tag, ...tags])
 
   const handleSearchTagUpdate = (tags: string[]) => setSearchTags(tags)
+  const handleTaskDelete = (taskId: string) => {
+    setTasks(tasks.filter(t => t.id !== taskId))
+    setCompletedTasks([...tasks.filter(t => t.id === taskId), ...completedTasks])
+  }
+  const handleTaskUnDelete = (taskId: string) => {
+    setTasks([...completedTasks.filter(t => t.id === taskId), ...tasks])
+    setCompletedTasks(completedTasks.filter(t => t.id !== taskId))
+
+  }
 
   return (
     <>
@@ -96,11 +106,14 @@ export default function Mock(props: any) {
               pt={20}
               tags={tags}
               tasks={tasks}
+              completedTasks={completedTasks}
               searchTags={searchTags}
               currentTaskId={currentTaskId}
               handleTaskClick={onClickTask}
               handleTaskAdd={handleTaskAdd}
               handleSearchTagUpdate={handleSearchTagUpdate}
+              onCompleted={handleTaskDelete}
+              onUnCompleted={handleTaskUnDelete}
             />
             {currentTask &&
               <Detail
@@ -151,7 +164,6 @@ const TASKS = [
   { id: "007", detail: "", label: "洗剤2", tags: ["004"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
 ]
 
-const completedTasks = [
-  { id: "001", label: "りんご", tags: ["001"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
-  { id: "002", label: "焼きそばの具", tags: ["001", "002"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
+const COMPLETEDTASKS = [
+  { id: "001", detail: "", label: "完了タスク", tags: ["001"], limitDate: "2023-06-10", createDate: "2023-04-10 23:10:10", updateDate: "2023-05-10" },
 ]

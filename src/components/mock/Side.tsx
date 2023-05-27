@@ -67,9 +67,14 @@ export function Side(props: any) {
                     >
                         タグなし
                     </SideButton>
-                    {/* <SideButton>
-                        ブックマーク
-                    </SideButton> */}
+                    <SideButton
+                        isSearchTag={false}
+                        tag={{ id: "completed", name: "done" }}
+                        searchTags={searchTags}
+                        searchTagUpdate={searchTagUpdate}
+                    >
+                        完了済み
+                    </SideButton>
                     <Heading
                         size={"md"}
                         textAlign={"left"}

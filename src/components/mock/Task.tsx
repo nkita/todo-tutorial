@@ -6,7 +6,8 @@ import {
     Text
 } from '@chakra-ui/react'
 export default function TaskList(props: any) {
-    const { task, handleTaskClick, currentTaskId } = props;
+    const { task, handleTaskClick, currentTaskId, isChecked, onChecked } = props;
+    const handleTaskChecked = (id: string) => { onChecked(id) };
 
     return (
         <Box
@@ -24,12 +25,17 @@ export default function TaskList(props: any) {
             onClick={e => handleTaskClick(task.id)}
         >
             <HStack>
-                <Checkbox />
+                <Checkbox
+                    onChange={e => handleTaskChecked(task.id)}
+                    isChecked={isChecked}
+                />
                 <Text
                     borderColor={"blue"}
                     w={"100%"}
                     p={1}
                     fontSize={"0.9em"}
+                    textDecoration={isChecked ? "line-through" : "none"}
+                    opacity={isChecked ? 0.5 : 0.9}
                 >
                     {task.label}
                 </Text>

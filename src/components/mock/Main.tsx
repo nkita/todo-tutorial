@@ -27,6 +27,9 @@ export function Main(props: any) {
         handleTaskAdd,
         currentTaskId,
         searchTags,
+        onCompleted,
+        onUnCompleted,
+        completedTasks,
         ...restProps
     } = props;
 
@@ -95,9 +98,12 @@ export function Main(props: any) {
             />
             <TaskList
                 tasks={tasks}
+                completedTasks={completedTasks}
                 currentTaskId={currentTaskId}
                 handleTaskClick={handleTaskClick}
                 searchTags={searchTags}
+                onCompleted={onCompleted}
+                onUnCompleted={onUnCompleted}
                 sx={{
                     overflow: "scroll",
                     overflowX: "hidden",
